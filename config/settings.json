@@ -1,0 +1,8 @@
+{
+  "raw_data_folder": "data/l1_raw",
+  "output_folder": "data/l3_output",
+  "db_name": "retail_project",
+  "db_user": "postgres",
+  "db_host": "localhost",
+  "db_port": 5432
+}
