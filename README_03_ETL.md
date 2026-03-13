@@ -472,20 +472,29 @@ def clean_orders(orders):
             continue
 
         try:
+            order_id = int(order_id)
+            customer_id = int(customer_id)
+            product_id = int(product_id)
             quantity = int(quantity_value)
         except ValueError:
             continue
 
         cleaned_orders.append({
-            "order_id": int(order_id),
-            "customer_id": int(customer_id),
-            "product_id": int(product_id),
+            "order_id": order_id,
+            "customer_id": customer_id,
+            "product_id": product_id,
             "quantity": quantity,
             "order_date": order_date
         })
 
     return cleaned_orders
 ```
+
+> **Hint:** This function safely skips bad rows.
+>
+> For example, if a raw record contains an invalid quantity such as `"two"`, the pipeline ignores that record instead of crashing.
+>
+> This is realistic because raw business data is often messy, and ETL pipelines must be robust enough to handle invalid values.
 
 ### What this code does
 
@@ -569,6 +578,10 @@ def build_sales_report(customers, products, orders):
 
     return sales_report
 ```
+> **Important:** At this point, `build_sales_report()` must receive the **cleaned customer records**, **cleaned product records**, and **cleaned order records**.
+>
+> The **raw order data** should **not** be passed directly into the report-building step.
+
 
 ### What this code does
 
